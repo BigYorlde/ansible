@@ -3,5 +3,5 @@
   become: yes
 
   roles:
-    - deploy_nginx_proxy:
-        when: ansible_system == 'Linux'
+    - deploy_nginx_proxy
+      #        when: ansible_system == 'Linux'

@@ -7,7 +7,7 @@
 - name: Configure nginx
   copy:
     src: flask_app.conf
-    dest: { { dest_folder } }
+    dest: "{{ dest_folder }}"
     mode: 0555
   notify: Restart nginx
 - name: Start nginx
