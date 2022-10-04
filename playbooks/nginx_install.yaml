@@ -2,24 +2,6 @@
   hosts: nginx_servers
   become: yes
 
-  tasks:
-  - name: Install nginx
-    apt:
-      name: nginx
-      state: latest
-  - name: Configure nginx
-    copy:
-      src: ./nginx/flask_app.conf
-      dest: /etc/nginx/sites-enabled/
-      mode: 0555
-    notify: Restart nginx
-  - name: Start nginx
-    service:
-      name: nginx
-      state: started
-      enabled: yes
-  handlers:
-  - name: Restart nginx
-    service:
-      name: nginx
-      state: restarted
+  roles:
+    - deploy_nginx_proxy:
+        when: ansible_system == 'Linux'
