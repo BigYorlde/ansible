@@ -1,5 +1,5 @@
 - name: Install and configure haproxy
-  hosts: haproxy_servers
+  hosts: "{{ hosts }}"
   become: yes
 
   roles:

@@ -1,5 +1,5 @@
 - name: Install and configure nginx
-  hosts: nginx_servers
+  hosts: "{{ hosts }}"
   become: yes
 
   roles:
