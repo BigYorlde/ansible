@@ -1,16 +1,18 @@
 - name: Reboot my servers
   hosts: all
   become: yes
+  vars:
+    what_to_do: "{{ todo }}"
 
 - tasks:
   - name: Reboot
     shell: sleep 3 && reboot now
     async: 1
     poll: 0
-    when: {{ todo }} == 'reboot'
+    when: what_to_do == 'reboot'
 
   - name: Shutdown
     shell: sleep 3 && shutdown now
     async: 1
     poll: 0
-    when: {{ todo }} == 'shutdown'
+    when: what_to_do == 'shutdown'
