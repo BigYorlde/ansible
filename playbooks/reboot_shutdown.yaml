@@ -5,10 +5,18 @@
     what_to_do: "{{ todo }}"
 
   tasks:
-  - name: Reboot
-    shell: sleep 3 && reboot now
-    async: 1
-    poll: 0
+  - block:
+        - name: Reboot
+          shell: sleep 3 && reboot now
+          async: 1
+          poll: 0
+        - name: Wait till servers will come up online
+          wait_for:
+                host: "{{ inventory_hostname }}"
+                state: started
+                delay: 5
+                timeout: 60
+          deligate_to: 127.0.0.1
     when: what_to_do == 'reboot'
 
   - name: Shutdown
